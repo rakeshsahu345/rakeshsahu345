@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Portfolio | Sketches, Digital Art, Paintings & Writings</title>
+    <!-- Google Fonts for Artistic Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #fcfbf9; /* Warm parchment cream */
+            --card-bg: #ffffff;
+            --text-color: #2b2b2b;
+            --muted-text: #686868;
+            --primary-color: #1a1a1a;
+            --accent-color: #b85d33; /* Terracotta artistic accent */
+            --border-color: #e6e2dd;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 30px;
+            background: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--muted-text);
+            max-width: 600px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px 20px;
+            background: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        nav button, .dropdown-btn {
+            background: none;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--muted-text);
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+        }
+
+        nav button:hover, nav button.active, .dropdown:hover .dropdown-btn {
+            background: var(--primary-color);
+            color: #ffffff;
+        }
+
+        /* Dropdowns */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--card-bg);
+            min-width: 180px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            z-index: 1100;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown-content a {
+            color: var(--text-color);
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f4f0ec;
+            color: var(--accent-color);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            min-height: 500px;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Home Grid */
+        .home-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .home-grid { grid-template-columns: 1fr; text-align: center; }
+        }
+
+        .home-img img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .home-text h2 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .home-text p {
+            color: var(--muted-text);
+            font-size: 1.05rem;
+        }
+
+        /* Filter Pills */
+        .filter-pills {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .pill-btn {
+            background: #eae5df;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 16px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pill-btn.active, .pill-btn:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* Gallery Cards */
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .art-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .art-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
+
+        .art-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .art-card-info {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .art-card-info h3 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .art-badge {
+            font-size: 0.75rem;
+            background: #f0e9e2;
+            color: var(--accent-color);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Writings Cards */
+        .writing-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .writing-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .writing-content {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            white-space: pre-line;
+            color: #444;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        /* Bookshelf Cards */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .book-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .book-card img {
+            width: 140px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+            margin-bottom: 15px;
+        }
+
+        .book-card h3 {
+            font-size: 1.05rem;
+            margin: 5px 0;
+            color: var(--primary-color);
+        }
+
+        .book-card p {
+            font-size: 0.88rem;
+            color: var(--muted-text);
+            margin: 2px 0 10px 0;
+        }
+
+        .book-rating {
+            color: #e5a93b;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .book-review {
+            font-size: 0.88rem;
+            font-style: italic;
+            color: #555;
+            background: #f9f6f0;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--muted-text);
+            font-size: 0.9rem;
+            margin-top: 60px;
+        }
+
+        .social-icons a {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin: 0 10px;
+            transition: color 0.2s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 id="hdr-name">My Artistic Sanctuary</h1>
+        <p id="hdr-tagline">Sketches, Digital Art, Words & Cinematic Moments</p>
+    </header>
+
+    <nav>
+        <button class="nav-btn active" onclick="openTab('home', this)">Home</button>
+        
+        <!-- Gallery Dropdown -->
+        <div class="dropdown">
+            <button class="dropdown-btn">Gallery <i class="fas fa-chevron-down" style="font-size:0.7rem;"></i></button>
+            <div class="dropdown-content">
+                <a href="#" onclick="openTab('gallery', document.querySelector('.dropdown-btn')); filterGallery('All'); return false;">All Works</a>
+                <a href="#" onclick="openTab('gallery', document.querySelector('.dropdown-btn')); filterGallery('Sketch'); return false;">Sketches</a>
+                <a href="#" onclick="openTab('gallery', document.querySelector('.dropdown-btn')); filterGallery('Digital Art'); return false;">Digital Art</a>
+                <a href="#" onclick="openTab('gallery', document.querySelector('.dropdown-btn')); filterGallery('Painting'); return false;">Paintings</a>
+                <a href="#" onclick="openTab('gallery', document.querySelector('.dropdown-btn')); filterGallery('Photography'); return false;">Photography</a>
+                <a href="#" onclick="openTab('gallery', document.querySelector('.dropdown-btn')); filterGallery('Reel'); return false;">Reels & Motion</a>
+            </div>
+        </div>
+
+        <!-- Writings Dropdown -->
+        <div class="dropdown">
+            <button class="dropdown-btn">Writings <i class="fas fa-chevron-down" style="font-size:0.7rem;"></i></button>
+            <div class="dropdown-content">
+                <a href="#" onclick="openTab('writings', document.querySelector('.dropdown-btn')); filterWritings('All'); return false;">All Writings</a>
+                <a href="#" onclick="openTab('writings', document.querySelector('.dropdown-btn')); filterWritings('Poem'); return false;">Poems</a>
+                <a href="#" onclick="openTab('writings', document.querySelector('.dropdown-btn')); filterWritings('Quote'); return false;">Sarcastic Quotes</a>
+            </div>
+        </div>
+
+        <button class="nav-btn" onclick="openTab('bookshelf', this)">Bookshelf</button>
+        <button class="nav-btn" onclick="openTab('about', this)">About</button>
+    </nav>
+
+    <div class="container">
+        <!-- HOME TAB -->
+        <section id="home" class="tab-content active">
+            <div class="home-grid">
+                <div class="home-img">
+                    <img id="home-profile-img" src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80" alt="Artist Space">
+                </div>
+                <div class="home-text">
+                    <h2 id="home-title">Welcome to My Creative Journal</h2>
+                    <p id="home-bio">Loading your bio from Google Sheets...</p>
+                    <div style="margin-top: 20px;" class="social-icons" id="home-socials"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GALLERY TAB -->
+        <section id="gallery" class="tab-content">
+            <h2 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 20px;">Visual Gallery</h2>
+            <div class="filter-pills">
+                <button class="pill-btn active" onclick="filterGallery('All')">All</button>
+                <button class="pill-btn" onclick="filterGallery('Sketch')">Sketches</button>
+                <button class="pill-btn" onclick="filterGallery('Digital Art')">Digital Art</button>
+                <button class="pill-btn" onclick="filterGallery('Painting')">Paintings</button>
+                <button class="pill-btn" onclick="filterGallery('Photography')">Photography</button>
+                <button class="pill-btn" onclick="filterGallery('Reel')">Reels</button>
+            </div>
+            <div id="gallery-grid" class="art-grid">Loading gallery...</div>
+        </section>
+
+        <!-- WRITINGS TAB -->
+        <section id="writings" class="tab-content">
+            <h2 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 20px;">Verses & Wit</h2>
+            <div class="filter-pills">
+                <button class="pill-btn active" onclick="filterWritings('All')">All</button>
+                <button class="pill-btn" onclick="filterWritings('Poem')">Poems</button>
+                <button class="pill-btn" onclick="filterWritings('Quote')">Sarcastic Quotes</button>
+            </div>
+            <div id="writings-container">Loading writings...</div>
+        </section>
+
+        <!-- BOOKSHELF TAB -->
+        <section id="bookshelf" class="tab-content">
+            <h2 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 20px;">The Bookshelf</h2>
+            <p style="color: var(--muted-text); margin-bottom: 30px;">Pages that fuel my sketches and spark my sarcasm.</p>
+            <div id="bookshelf-grid" class="books-grid">Loading books...</div>
+        </section>
+
+        <!-- ABOUT TAB -->
+        <section id="about" class="tab-content">
+            <div id="about-container">Loading about details...</div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="social-icons" id="footer-socials"></div>
+        <p style="margin-top: 15px;">&copy; <span id="footer-year"></span> Artistic Portfolio. Crafted with passion.</p>
+    </footer>
+
+    <script>
+        // YOUR LINKED GOOGLE SHEET ID
+        const SHEET_ID = '18JIaHVIfP-rP2z9SbjEwbBLFuwOer35VKZBvnwDUd1I';
+
+        function formatImageUrl(url) {
+            if (!url) return '';
+            url = url.trim();
+            if (url.includes('drive.google.com')) {
+                const match = url.match(/\/d\/([^\/\?]+)/);
+                if (match && match[1]) {
+                    return `https://lh3.googleusercontent.com/d/${match[1]}`;
+                }
+            }
+            return url;
+        }
+
+        function parseCSV(text) {
+            const lines = text.split(/\r?\n/);
+            return lines.map(line => {
+                const values = [];
+                let current = '';
+                let inQuotes = false;
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    if (char === '"' && line[i+1] === '"') {
+                        current += '"';
+                        i++;
+                    } else if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        values.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                values.push(current.trim());
+                return values;
+            }).filter(row => row.some(cell => cell.length > 0));
+        }
+
+        async function fetchTabData(tabName) {
+            try {
+                const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tabName)}`;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const text = await response.text();
+                return parseCSV(text);
+            } catch (err) {
+                console.error(`Error loading tab "${tabName}":`, err);
+                return [];
+            }
+        }
+
+        function openTab(tabId, element) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (element && element.classList.contains('nav-btn')) {
+                element.classList.add('active');
+            }
+        }
+
+        // Global Data Stores for Filtering
+        let allArtworks = [];
+        let allWritings = [];
+
+        async function loadHome() {
+            const rows = await fetchTabData('Home');
+            let socialsHTML = '';
+            rows.forEach(r => {
+                const key = (r[0] || '').toLowerCase();
+                const val = r[1] || '';
+                if (key.includes('name')) document.getElementById('hdr-name').innerText = val;
+                if (key.includes('tagline')) document.getElementById('hdr-tagline').innerText = val;
+                if (key.includes('profile_pic')) {
+                    const img = formatImageUrl(val);
+                    if(img) document.getElementById('home-profile-img').src = img;
+                }
+                if (key.includes('bio')) document.getElementById('home-bio').innerText = val;
+                if (key.includes('instagram')) socialsHTML += `<a href="${val}" target="_blank"><i class="fab fa-instagram"></i></a>`;
+                if (key.includes('youtube')) socialsHTML += `<a href="${val}" target="_blank"><i class="fab fa-youtube"></i></a>`;
+                if (key.includes('email')) socialsHTML += `<a href="mailto:${val}"><i class="fas fa-envelope"></i></a>`;
+            });
+            document.getElementById('home-socials').innerHTML = socialsHTML;
+            document.getElementById('footer-socials').innerHTML = socialsHTML;
+            document.getElementById('footer-year').innerText = new Date().getFullYear();
+        }
+
+        async function loadGallery() {
+            const rows = await fetchTabData('Gallery');
+            allArtworks = [];
+            rows.forEach((r, idx) => {
+                if (idx === 0 && r[0].toLowerCase().includes('category')) return;
+                const category = r[0] || 'Art';
+                const title = r[1] || '';
+                const imgUrl = formatImageUrl(r[2]);
+                const link = r[3] || '';
+                if (title && imgUrl) {
+                    allArtworks.push({ category, title, imgUrl, link });
+                }
+            });
+            renderGallery(allArtworks);
+        }
+
+        function renderGallery(items) {
+            const grid = document.getElementById('gallery-grid');
+            if (items.length === 0) {
+                grid.innerHTML = '<p>No artworks found in this category.</p>';
+                return;
+            }
+            let html = '';
+            items.forEach(art => {
+                const cardContent = `
+                    <div class="art-card">
+                        <img src="${art.imgUrl}" alt="${art.title}">
+                        <div class="art-card-info">
+                            <h3>${art.title}</h3>
+                            <span class="art-badge">${art.category}</span>
+                        </div>
+                    </div>
+                `;
+                if (art.link) {
+                    html += `<a href="${art.link}" target="_blank" style="text-decoration:none;">${cardContent}</a>`;
+                } else {
+                    html += cardContent;
+                }
+            });
+            grid.innerHTML = html;
+        }
+
+        function filterGallery(cat) {
+            if (cat === 'All') {
+                renderGallery(allArtworks);
+            } else {
+                renderGallery(allArtworks.filter(a => a.category.toLowerCase() === cat.toLowerCase()));
+            }
+        }
+
+        async function loadWritings() {
+            const rows = await fetchTabData('Writings');
+            allWritings = [];
+            rows.forEach((r, idx) => {
+                if (idx === 0 && r[0].toLowerCase().includes('type')) return;
+                const type = r[0] || 'Poem';
+                const title = r[1] || '';
+                const content = r[2] || '';
+                const date = r[3] || '';
+                if (content) {
+                    allWritings.push({ type, title, content, date });
+                }
+            });
+            renderWritings(allWritings);
+        }
+
+        function renderWritings(items) {
+            const container = document.getElementById('writings-container');
+            if (items.length === 0) {
+                container.innerHTML = '<p>No writings found.</p>';
+                return;
+            }
+            let html = '';
+            items.forEach(w => {
+                html += `
+                    <div class="writing-card">
+                        ${w.title ? `<h3>${w.title}</h3>` : ''}
+                        <div class="writing-content">${w.content}</div>
+                        ${w.date ? `<small style="color:var(--muted-text); display:block; margin-top:15px;">— ${w.date}</small>` : ''}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function filterWritings(type) {
+            if (type === 'All') {
+                renderWritings(allWritings);
+            } else {
+                renderWritings(allWritings.filter(w => w.type.toLowerCase() === type.toLowerCase()));
+            }
+        }
+
+        async function loadBookshelf() {
+            const rows = await fetchTabData('Bookshelf');
+            const grid = document.getElementById('bookshelf-grid');
+            let html = '';
+            rows.forEach((r, idx) => {
+                if (idx === 0 && r[0].toLowerCase().includes('title')) return;
+                const title = r[0] || '';
+                const author = r[1] || '';
+                const cover = formatImageUrl(r[2]);
+                const rating = r[3] || '⭐⭐⭐⭐⭐';
+                const review = r[4] || '';
+                if (title) {
+                    html += `
+                        <div class="book-card">
+                            ${cover ? `<img src="${cover}" alt="${title}">` : ''}
+                            <h3>${title}</h3>
+                            <p>by ${author}</p>
+                            <div class="book-rating">${rating}</div>
+                            ${review ? `<div class="book-review">"${review}"</div>` : ''}
+                        </div>
+                    `;
+                }
+            });
+            grid.innerHTML = html || '<p>No books added yet.</p>';
+        }
+
+        async function loadAbout() {
+            const rows = await fetchTabData('About');
+            const container = document.getElementById('about-container');
+            let html = '<div class="home-grid">';
+            rows.forEach((r, idx) => {
+                const heading = r[0] || '';
+                const desc = r[1] || '';
+                const img = formatImageUrl(r[2]);
+                html += `
+                    <div class="home-text">
+                        <h2 style="font-family:var(--font-serif); font-size:2rem; color:var(--primary-color);">${heading}</h2>
+                        <p style="font-size:1.05rem; color:var(--muted-text);">${desc}</p>
+                    </div>
+                    ${img ? `<div class="home-img"><img src="${img}" alt="About me" style="border-radius:16px;"></div>` : ''}
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // Initialize Page Load & Auto-load all tabs
+        window.addEventListener('DOMContentLoaded', () => {
+            loadHome();
+            loadGallery();
+            loadWritings();
+            loadBookshelf();
+            loadAbout();
+        });
+    </script>
+</body>
+</html>
