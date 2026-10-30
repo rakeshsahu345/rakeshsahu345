@@ -3,21 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artist Portfolio | Sketches, Digital Art, Paintings & Writings</title>
-    <!-- Google Fonts for Artistic Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
+    <title>Rakesh Sahu | Creative Sanctuary & Art Gallery</title>
+
+    <!-- Google Fonts for Artistic & Expressionist Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome & Academicons for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --bg-color: #fcfbf9; /* Warm parchment cream */
-            --card-bg: #ffffff;
-            --text-color: #2b2b2b;
-            --muted-text: #686868;
-            --primary-color: #1a1a1a;
-            --accent-color: #b85d33; /* Terracotta artistic accent */
-            --border-color: #e6e2dd;
+            --bg-gradient: linear-gradient(135deg, #fdfbf7 0%, #f4ece1 50%, #f2ebf9 100%);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(255, 255, 255, 0.6);
+            --text-color: #1e1b18;
+            --muted-text: #635a52;
+            --primary-accent: #7c3aed; /* Electric Violet */
+            --secondary-accent: #e11d48; /* Crimson Magenta */
+            --warm-accent: #d97706; /* Amber Gold */
+            --border-color: #e5dcd3;
+            
+            --font-display: 'Cinzel Decorative', serif;
             --font-serif: 'Playfair Display', serif;
+            --font-hand: 'Caveat', cursive;
             --font-sans: 'Plus Jakarta Sans', sans-serif;
         }
 
@@ -25,47 +33,77 @@
             font-family: var(--font-sans);
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
+            background: var(--bg-gradient);
+            background-attachment: fixed;
             color: var(--text-color);
             line-height: 1.7;
+            overflow-x: hidden;
         }
 
+        /* Ambient Animated Background Blobs */
+        .bg-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.25;
+            z-index: -1;
+            animation: float 18s infinite alternate ease-in-out;
+        }
+
+        .blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: #e11d48; }
+        .blob-2 { top: 40%; right: -10%; width: 550px; height: 550px; background: #7c3aed; }
+        .blob-3 { bottom: -10%; left: 20%; width: 450px; height: 450px; background: #f59e0b; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, 50px) scale(1.1); }
+            100% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* Header Section */
         header {
             text-align: center;
-            padding: 60px 20px 30px;
-            background: var(--bg-color);
-            border-bottom: 1px solid var(--border-color);
+            padding: 70px 20px 40px;
+            position: relative;
         }
 
         header h1 {
-            font-family: var(--font-serif);
-            font-size: 3rem;
-            margin: 0 0 10px 0;
-            color: var(--primary-color);
-            letter-spacing: -0.5px;
+            font-family: var(--font-display);
+            font-size: 3.2rem;
+            margin: 0;
+            background: linear-gradient(135deg, #1e1b18 0%, #7c3aed 50%, #e11d48 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
         header p {
-            font-size: 1.1rem;
-            color: var(--muted-text);
-            max-width: 600px;
-            margin: 0 auto;
-            font-style: italic;
+            font-family: var(--font-hand);
+            font-size: 1.6rem;
+            color: var(--secondary-accent);
+            max-width: 650px;
+            margin: 10px auto 0;
         }
 
-        /* Navigation Bar */
+        /* Artistic Glassmorphism Navbar */
         nav {
             display: flex;
             justify-content: center;
+            align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
-            padding: 15px 20px;
-            background: var(--bg-color);
+            gap: 12px;
+            padding: 14px 24px;
+            background: rgba(255, 255, 255, 0.7);
             position: sticky;
-            top: 0;
+            top: 15px;
             z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
         }
 
         nav button, .dropdown-btn {
@@ -73,72 +111,86 @@
             border: none;
             font-family: var(--font-sans);
             font-size: 0.95rem;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--muted-text);
-            padding: 8px 16px;
+            padding: 10px 20px;
             cursor: pointer;
-            border-radius: 20px;
-            transition: all 0.2s ease;
+            border-radius: 25px;
+            transition: all 0.3s ease;
         }
 
         nav button:hover, nav button.active, .dropdown:hover .dropdown-btn {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
             color: #ffffff;
+            box-shadow: 0 6px 16px rgba(124, 58, 237, 0.3);
+            transform: translateY(-2px);
         }
 
-        /* Dropdowns */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+        /* Dropdown Menus */
+        .dropdown { position: relative; display: inline-block; }
 
         .dropdown-content {
             display: none;
             position: absolute;
-            background-color: var(--card-bg);
-            min-width: 180px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            background: rgba(255, 255, 255, 0.95);
+            min-width: 200px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
             z-index: 1100;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             border: 1px solid var(--border-color);
-            top: 100%;
-            left: 0;
+            top: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            backdrop-filter: blur(12px);
         }
 
         .dropdown-content a {
             color: var(--text-color);
-            padding: 10px 16px;
+            padding: 12px 20px;
             text-decoration: none;
             display: block;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: background 0.2s;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s;
         }
 
         .dropdown-content a:hover {
-            background-color: #f4f0ec;
-            color: var(--accent-color);
+            background: #f3e8ff;
+            color: var(--primary-accent);
         }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+        .dropdown:hover .dropdown-content { display: block; }
 
+        /* Main Container */
         .container {
-            max-width: 1100px;
+            max-width: 1120px;
             margin: 40px auto;
             padding: 0 20px;
-            min-height: 500px;
+            min-height: 550px;
         }
 
         .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease-in-out; }
 
-        /* Home Grid */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Section */
+        .home-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.05);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+        }
+
         .home-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 320px 1fr;
             gap: 40px;
             align-items: center;
         }
@@ -147,299 +199,353 @@
             .home-grid { grid-template-columns: 1fr; text-align: center; }
         }
 
-        .home-img img {
+        .home-img-wrapper {
+            position: relative;
+        }
+
+        .home-img-wrapper img {
             width: 100%;
-            max-height: 450px;
+            height: 380px;
             object-fit: cover;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-radius: 20px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+            border: 4px solid #ffffff;
+            transition: transform 0.4s ease;
+        }
+
+        .home-img-wrapper:hover img {
+            transform: scale(1.02) rotate(-1deg);
         }
 
         .home-text h2 {
             font-family: var(--font-serif);
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             margin-top: 0;
-            color: var(--primary-color);
+            color: var(--primary-accent);
         }
 
         .home-text p {
             color: var(--muted-text);
-            font-size: 1.05rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
 
         /* Filter Pills */
         .filter-pills {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 30px;
             flex-wrap: wrap;
         }
 
         .pill-btn {
-            background: #eae5df;
-            border: none;
-            padding: 6px 16px;
-            border-radius: 16px;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--text-color);
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--border-color);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--muted-text);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
 
         .pill-btn.active, .pill-btn:hover {
-            background: var(--accent-color);
-            color: white;
+            background: var(--secondary-accent);
+            color: #ffffff;
+            border-color: var(--secondary-accent);
+            box-shadow: 0 6px 16px rgba(225, 29, 72, 0.3);
+            transform: translateY(-2px);
         }
 
-        /* Gallery Cards */
+        /* Gallery Grid */
         .art-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 28px;
         }
 
         .art-card {
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 20px;
             overflow: hidden;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+            transition: all 0.35s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
         }
 
         .art-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 36px rgba(124, 58, 237, 0.15);
         }
 
         .art-card img {
             width: 100%;
-            height: 280px;
+            height: 290px;
             object-fit: cover;
             display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .art-card:hover img {
+            transform: scale(1.05);
         }
 
         .art-card-info {
-            padding: 15px 20px;
+            padding: 18px 22px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: #ffffff;
         }
 
         .art-card-info h3 {
             margin: 0;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-color);
         }
 
         .art-badge {
             font-size: 0.75rem;
-            background: #f0e9e2;
-            color: var(--accent-color);
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-weight: 700;
+            background: linear-gradient(135deg, #f3e8ff, #ffe4e6);
+            color: var(--primary-accent);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 800;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        /* Writings Cards */
+        /* Writings / Poetry Section */
         .writing-card {
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            margin-bottom: 28px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .writing-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 6px; height: 100%;
+            background: linear-gradient(to bottom, var(--primary-accent), var(--secondary-accent));
         }
 
         .writing-card h3 {
             font-family: var(--font-serif);
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             margin-top: 0;
-            color: var(--primary-color);
+            color: var(--primary-accent);
         }
 
         .writing-content {
             font-family: var(--font-serif);
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             white-space: pre-line;
-            color: #444;
-            line-height: 1.8;
+            color: #332f2b;
+            line-height: 1.9;
             font-style: italic;
+        }
+
+        .quote-style {
+            font-family: var(--font-hand);
+            font-size: 1.7rem;
+            color: var(--secondary-accent);
+            font-style: normal;
         }
 
         /* Bookshelf Cards */
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 28px;
         }
 
         .book-card {
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid var(--card-border);
             text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
         }
 
         .book-card img {
             width: 140px;
-            height: 200px;
+            height: 205px;
             object-fit: cover;
-            border-radius: 6px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            margin-bottom: 16px;
         }
 
         .book-card h3 {
-            font-size: 1.05rem;
-            margin: 5px 0;
-            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin: 6px 0 2px;
+            color: var(--text-color);
         }
 
         .book-card p {
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             color: var(--muted-text);
-            margin: 2px 0 10px 0;
+            margin: 0 0 10px;
         }
 
         .book-rating {
-            color: #e5a93b;
-            font-size: 0.9rem;
-            margin-bottom: 8px;
+            color: var(--warm-accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
         }
 
         .book-review {
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             font-style: italic;
-            color: #555;
-            background: #f9f6f0;
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 10px;
+            color: #4a443f;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Social Icons */
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #ffffff;
+            color: var(--primary-accent);
+            font-size: 1.2rem;
+            margin: 0 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary-accent);
+            color: #ffffff;
+            transform: translateY(-3px) scale(1.05);
         }
 
         footer {
             text-align: center;
             padding: 40px 20px;
-            border-top: 1px solid var(--border-color);
-            color: var(--muted-text);
-            font-size: 0.9rem;
             margin-top: 60px;
-        }
-
-        .social-icons a {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            margin: 0 10px;
-            transition: color 0.2s;
-        }
-
-        .social-icons a:hover {
-            color: var(--accent-color);
+            color: var(--muted-text);
+            font-size: 0.92rem;
+            border-top: 1px solid var(--border-color);
         }
     </style>
 </head>
 <body>
 
+    <!-- Ambient Background Blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
     <header>
-        <h1 id="hdr-name">My Artistic Sanctuary</h1>
-        <p id="hdr-tagline">Sketches, Digital Art, Words & Cinematic Moments</p>
+        <h1 id="hdr-name">Rakesh Sahu</h1>
+        <p id="hdr-tagline">Sketches • Digital Art • Words • Mobile Reels</p>
     </header>
 
     <nav>
-        <button class="nav-btn active" onclick="openTab('home', this)">Home</button>
+        <button class="nav-btn active" onclick="openTab('home', this)"><i class="fas fa-palette"></i> Home</button>
         
         <!-- Gallery Dropdown -->
         <div class="dropdown">
-            <button class="dropdown-btn">Gallery <i class="fas fa-chevron-down" style="font-size:0.7rem;"></i></button>
-            <div class="dropdown-content">
-                <a href="#" onclick="openTab('gallery', document.querySelector('.dropdown-btn')); filterGallery('All'); return false;">All Works</a>
-                <a href="#" onclick="openTab('gallery', document.querySelector('.dropdown-btn')); filterGallery('Sketch'); return false;">Sketches</a>
-                <a href="#" onclick="openTab('gallery', document.querySelector('.dropdown-btn')); filterGallery('Digital Art'); return false;">Digital Art</a>
-                <a href="#" onclick="openTab('gallery', document.querySelector('.dropdown-btn')); filterGallery('Painting'); return false;">Paintings</a>
-                <a href="#" onclick="openTab('gallery', document.querySelector('.dropdown-btn')); filterGallery('Photography'); return false;">Photography</a>
-                <a href="#" onclick="openTab('gallery', document.querySelector('.dropdown-btn')); filterGallery('Reel'); return false;">Reels & Motion</a>
+            <button class="dropdown-btn" id="gallery-dd-btn"><i class="fas fa-images"></i> Gallery <i class="fas fa-chevron-down" style="font-size:0.75rem;"></i></button>
+            <div class="dropdown-content" id="gallery-dd-items">
+                <a href="#" onclick="openTab('gallery', document.getElementById('gallery-dd-btn')); filterGallery('All'); return false;">All Works</a>
             </div>
         </div>
 
         <!-- Writings Dropdown -->
         <div class="dropdown">
-            <button class="dropdown-btn">Writings <i class="fas fa-chevron-down" style="font-size:0.7rem;"></i></button>
-            <div class="dropdown-content">
-                <a href="#" onclick="openTab('writings', document.querySelector('.dropdown-btn')); filterWritings('All'); return false;">All Writings</a>
-                <a href="#" onclick="openTab('writings', document.querySelector('.dropdown-btn')); filterWritings('Poem'); return false;">Poems</a>
-                <a href="#" onclick="openTab('writings', document.querySelector('.dropdown-btn')); filterWritings('Quote'); return false;">Sarcastic Quotes</a>
+            <button class="dropdown-btn" id="writings-dd-btn"><i class="fas fa-feather-alt"></i> Writings <i class="fas fa-chevron-down" style="font-size:0.75rem;"></i></button>
+            <div class="dropdown-content" id="writings-dd-items">
+                <a href="#" onclick="openTab('writings', document.getElementById('writings-dd-btn')); filterWritings('All'); return false;">All Writings</a>
             </div>
         </div>
 
-        <button class="nav-btn" onclick="openTab('bookshelf', this)">Bookshelf</button>
-        <button class="nav-btn" onclick="openTab('about', this)">About</button>
+        <button class="nav-btn" onclick="openTab('bookshelf', this)"><i class="fas fa-book-open"></i> Bookshelf</button>
+        <button class="nav-btn" onclick="openTab('about', this)"><i class="fas fa-user-astronaut"></i> About</button>
     </nav>
 
     <div class="container">
         <!-- HOME TAB -->
         <section id="home" class="tab-content active">
-            <div class="home-grid">
-                <div class="home-img">
-                    <img id="home-profile-img" src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80" alt="Artist Space">
-                </div>
-                <div class="home-text">
-                    <h2 id="home-title">Welcome to My Creative Journal</h2>
-                    <p id="home-bio">Loading your bio from Google Sheets...</p>
-                    <div style="margin-top: 20px;" class="social-icons" id="home-socials"></div>
+            <div class="home-card">
+                <div class="home-grid">
+                    <div class="home-img-wrapper">
+                        <img id="home-profile-img" src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80" alt="Artist Space">
+                    </div>
+                    <div class="home-text">
+                        <h2 id="home-title">Welcome to My Creative Journal</h2>
+                        <p id="home-bio">Loading artist bio...</p>
+                        <div style="margin-top: 25px;" class="social-icons" id="home-socials"></div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- GALLERY TAB -->
         <section id="gallery" class="tab-content">
-            <h2 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 20px;">Visual Gallery</h2>
-            <div class="filter-pills">
+            <h2 style="font-family: var(--font-serif); font-size: 2.2rem; margin-bottom: 20px; color: var(--primary-accent);">Visual Gallery</h2>
+            <div class="filter-pills" id="gallery-pills-container">
                 <button class="pill-btn active" onclick="filterGallery('All')">All</button>
-                <button class="pill-btn" onclick="filterGallery('Sketch')">Sketches</button>
-                <button class="pill-btn" onclick="filterGallery('Digital Art')">Digital Art</button>
-                <button class="pill-btn" onclick="filterGallery('Painting')">Paintings</button>
-                <button class="pill-btn" onclick="filterGallery('Photography')">Photography</button>
-                <button class="pill-btn" onclick="filterGallery('Reel')">Reels</button>
             </div>
             <div id="gallery-grid" class="art-grid">Loading gallery...</div>
         </section>
 
         <!-- WRITINGS TAB -->
         <section id="writings" class="tab-content">
-            <h2 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 20px;">Verses & Wit</h2>
-            <div class="filter-pills">
+            <h2 style="font-family: var(--font-serif); font-size: 2.2rem; margin-bottom: 20px; color: var(--primary-accent);">Verses & Wit</h2>
+            <div class="filter-pills" id="writings-pills-container">
                 <button class="pill-btn active" onclick="filterWritings('All')">All</button>
-                <button class="pill-btn" onclick="filterWritings('Poem')">Poems</button>
-                <button class="pill-btn" onclick="filterWritings('Quote')">Sarcastic Quotes</button>
             </div>
             <div id="writings-container">Loading writings...</div>
         </section>
 
         <!-- BOOKSHELF TAB -->
         <section id="bookshelf" class="tab-content">
-            <h2 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 20px;">The Bookshelf</h2>
-            <p style="color: var(--muted-text); margin-bottom: 30px;">Pages that fuel my sketches and spark my sarcasm.</p>
+            <h2 style="font-family: var(--font-serif); font-size: 2.2rem; margin-bottom: 10px; color: var(--primary-accent);">The Bookshelf</h2>
+            <p style="color: var(--muted-text); margin-bottom: 30px; font-size: 1.05rem;">Pages that fuel my sketches and spark my sarcasm.</p>
             <div id="bookshelf-grid" class="books-grid">Loading books...</div>
         </section>
 
         <!-- ABOUT TAB -->
         <section id="about" class="tab-content">
-            <div id="about-container">Loading about details...</div>
+            <div id="about-container" class="home-card">Loading about details...</div>
         </section>
     </div>
 
     <footer>
         <div class="social-icons" id="footer-socials"></div>
-        <p style="margin-top: 15px;">&copy; <span id="footer-year"></span> Artistic Portfolio. Crafted with passion.</p>
+        <p style="margin-top: 18px;">&copy; <span id="footer-year"></span> Rakesh Sahu. All rights reserved.</p>
     </footer>
 
     <script>
-        // YOUR LINKED GOOGLE SHEET ID
         const SHEET_ID = '18JIaHVIfP-rP2z9SbjEwbBLFuwOer35VKZBvnwDUd1I';
 
         function formatImageUrl(url) {
@@ -481,8 +587,9 @@
 
         async function fetchTabData(tabName) {
             try {
-                const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tabName)}`;
-                const response = await fetch(url);
+                const cacheBuster = new Date().getTime();
+                const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tabName)}&_=${cacheBuster}`;
+                const response = await fetch(url, { cache: 'no-store' });
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const text = await response.text();
                 return parseCSV(text);
@@ -501,7 +608,6 @@
             }
         }
 
-        // Global Data Stores for Filtering
         let allArtworks = [];
         let allWritings = [];
 
@@ -518,9 +624,9 @@
                     if(img) document.getElementById('home-profile-img').src = img;
                 }
                 if (key.includes('bio')) document.getElementById('home-bio').innerText = val;
-                if (key.includes('instagram')) socialsHTML += `<a href="${val}" target="_blank"><i class="fab fa-instagram"></i></a>`;
-                if (key.includes('youtube')) socialsHTML += `<a href="${val}" target="_blank"><i class="fab fa-youtube"></i></a>`;
-                if (key.includes('email')) socialsHTML += `<a href="mailto:${val}"><i class="fas fa-envelope"></i></a>`;
+                if (key.includes('instagram')) socialsHTML += `<a href="${val}" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>`;
+                if (key.includes('youtube')) socialsHTML += `<a href="${val}" target="_blank" title="YouTube / Reels"><i class="fab fa-youtube"></i></a>`;
+                if (key.includes('email')) socialsHTML += `<a href="mailto:${val}" title="Email"><i class="fas fa-envelope"></i></a>`;
             });
             document.getElementById('home-socials').innerHTML = socialsHTML;
             document.getElementById('footer-socials').innerHTML = socialsHTML;
@@ -530,23 +636,40 @@
         async function loadGallery() {
             const rows = await fetchTabData('Gallery');
             allArtworks = [];
+            const categoriesSet = new Set(['All']);
+
             rows.forEach((r, idx) => {
                 if (idx === 0 && r[0].toLowerCase().includes('category')) return;
-                const category = r[0] || 'Art';
-                const title = r[1] || '';
+                const category = (r[0] || 'Art').trim();
+                const title = (r[1] || '').trim();
                 const imgUrl = formatImageUrl(r[2]);
-                const link = r[3] || '';
+                const link = (r[3] || '').trim();
+
+                if (category) categoriesSet.add(category);
                 if (title && imgUrl) {
                     allArtworks.push({ category, title, imgUrl, link });
                 }
             });
+
+            // Dynamically generate filter pills and dropdown links for ALL categories found in Google Sheet!
+            let pillsHTML = `<button class="pill-btn active" onclick="filterGallery('All')">All</button>`;
+            let ddHTML = `<a href="#" onclick="openTab('gallery', document.getElementById('gallery-dd-btn')); filterGallery('All'); return false;">All Works</a>`;
+
+            Array.from(categoriesSet).filter(c => c !== 'All').forEach(cat => {
+                pillsHTML += `<button class="pill-btn" onclick="filterGallery('${cat}')">${cat}</button>`;
+                ddHTML += `<a href="#" onclick="openTab('gallery', document.getElementById('gallery-dd-btn')); filterGallery('${cat}'); return false;">${cat}</a>`;
+            });
+
+            document.getElementById('gallery-pills-container').innerHTML = pillsHTML;
+            document.getElementById('gallery-dd-items').innerHTML = ddHTML;
+
             renderGallery(allArtworks);
         }
 
         function renderGallery(items) {
             const grid = document.getElementById('gallery-grid');
             if (items.length === 0) {
-                grid.innerHTML = '<p>No artworks found in this category.</p>';
+                grid.innerHTML = '<p style="color:var(--muted-text);">No artworks found in this category.</p>';
                 return;
             }
             let html = '';
@@ -570,6 +693,14 @@
         }
 
         function filterGallery(cat) {
+            document.querySelectorAll('#gallery-pills-container .pill-btn').forEach(btn => {
+                if (btn.innerText.trim().toLowerCase() === cat.toLowerCase() || (cat === 'All' && btn.innerText.includes('All'))) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
             if (cat === 'All') {
                 renderGallery(allArtworks);
             } else {
@@ -580,32 +711,50 @@
         async function loadWritings() {
             const rows = await fetchTabData('Writings');
             allWritings = [];
+            const typesSet = new Set(['All']);
+
             rows.forEach((r, idx) => {
                 if (idx === 0 && r[0].toLowerCase().includes('type')) return;
-                const type = r[0] || 'Poem';
-                const title = r[1] || '';
-                const content = r[2] || '';
-                const date = r[3] || '';
+                const type = (r[0] || 'Poem').trim();
+                const title = (r[1] || '').trim();
+                const content = (r[2] || '').trim();
+                const date = (r[3] || '').trim();
+
+                if (type) typesSet.add(type);
                 if (content) {
                     allWritings.push({ type, title, content, date });
                 }
             });
+
+            // Dynamically generate filter pills and dropdown links for Writings!
+            let pillsHTML = `<button class="pill-btn active" onclick="filterWritings('All')">All</button>`;
+            let ddHTML = `<a href="#" onclick="openTab('writings', document.getElementById('writings-dd-btn')); filterWritings('All'); return false;">All Writings</a>`;
+
+            Array.from(typesSet).filter(t => t !== 'All').forEach(type => {
+                pillsHTML += `<button class="pill-btn" onclick="filterWritings('${type}')">${type}</button>`;
+                ddHTML += `<a href="#" onclick="openTab('writings', document.getElementById('writings-dd-btn')); filterWritings('${type}'); return false;">${type}</a>`;
+            });
+
+            document.getElementById('writings-pills-container').innerHTML = pillsHTML;
+            document.getElementById('writings-dd-items').innerHTML = ddHTML;
+
             renderWritings(allWritings);
         }
 
         function renderWritings(items) {
             const container = document.getElementById('writings-container');
             if (items.length === 0) {
-                container.innerHTML = '<p>No writings found.</p>';
+                container.innerHTML = '<p style="color:var(--muted-text);">No writings found.</p>';
                 return;
             }
             let html = '';
             items.forEach(w => {
+                const isQuote = w.type.toLowerCase().includes('quote');
                 html += `
                     <div class="writing-card">
                         ${w.title ? `<h3>${w.title}</h3>` : ''}
-                        <div class="writing-content">${w.content}</div>
-                        ${w.date ? `<small style="color:var(--muted-text); display:block; margin-top:15px;">— ${w.date}</small>` : ''}
+                        <div class="writing-content ${isQuote ? 'quote-style' : ''}">${w.content}</div>
+                        ${w.date ? `<small style="color:var(--muted-text); display:block; margin-top:15px; font-style:normal;">— ${w.date}</small>` : ''}
                     </div>
                 `;
             });
@@ -613,6 +762,14 @@
         }
 
         function filterWritings(type) {
+            document.querySelectorAll('#writings-pills-container .pill-btn').forEach(btn => {
+                if (btn.innerText.trim().toLowerCase() === type.toLowerCase() || (type === 'All' && btn.innerText.includes('All'))) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
             if (type === 'All') {
                 renderWritings(allWritings);
             } else {
@@ -643,7 +800,7 @@
                     `;
                 }
             });
-            grid.innerHTML = html || '<p>No books added yet.</p>';
+            grid.innerHTML = html || '<p style="color:var(--muted-text);">No books added yet.</p>';
         }
 
         async function loadAbout() {
@@ -656,17 +813,16 @@
                 const img = formatImageUrl(r[2]);
                 html += `
                     <div class="home-text">
-                        <h2 style="font-family:var(--font-serif); font-size:2rem; color:var(--primary-color);">${heading}</h2>
-                        <p style="font-size:1.05rem; color:var(--muted-text);">${desc}</p>
+                        <h2 style="font-family:var(--font-serif); font-size:2.2rem; color:var(--primary-accent);">${heading}</h2>
+                        <p style="font-size:1.08rem; color:var(--muted-text); line-height:1.8;">${desc}</p>
                     </div>
-                    ${img ? `<div class="home-img"><img src="${img}" alt="About me" style="border-radius:16px;"></div>` : ''}
+                    ${img ? `<div class="home-img-wrapper"><img src="${img}" alt="About me"></div>` : ''}
                 `;
             });
             html += '</div>';
             container.innerHTML = html;
         }
 
-        // Initialize Page Load & Auto-load all tabs
         window.addEventListener('DOMContentLoaded', () => {
             loadHome();
             loadGallery();
